@@ -759,7 +759,7 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
             menu.append((_("Save playlist"), "saveplaylist"));
             menu.append((_("Delete saved playlist"), "deleteplaylist"));
-            menu.append((_("Edit settings"), "settings"))
+        menu.append((_("Edit settings"), "settings"))
         self.timerHideMediaPlayerInfoBar()
         self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 
