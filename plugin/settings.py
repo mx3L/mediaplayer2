@@ -22,13 +22,21 @@ config.plugins.mediaplayer2.mainMenu = ConfigYesNo(default=False)
 config.plugins.mediaplayer2.cueSheetForServicemp3 = ConfigOnOff(default=True)
 config.plugins.mediaplayer2.saveLastPosition = ConfigYesNo(default=True)
 config.plugins.mediaplayer2.onMovieStart = ConfigSelection(default = "resume", choices = [
-		("ask yes", _("Ask user") + " " + _("default") + " " + _("yes")),
-		("ask no", _("Ask user") + " " + _("default") + " " + _("no")),
-		("resume", _("Resume from last position")),
-		("beginning", _("Start from the beginning"))])
+        ("ask yes", _("Ask user") + " " + _("default") + " " + _("yes")),
+        ("ask no", _("Ask user") + " " + _("default") + " " + _("no")),
+        ("resume", _("Resume from last position")),
+        ("beginning", _("Start from the beginning"))])
 config.plugins.mediaplayer2.useLibMedia = ConfigYesNo(default = False)
 config.plugins.mediaplayer2.libMedia = ConfigSelection(default='gst', choices=[('gst', 'GStreamer'), ('ep3', 'EPlayer3')])
-config.plugins.mediaplayer2.lcdOnVideoPlayback = ConfigSelection(default='default', choices=[('default', _("Default")), ('remaining', _("shows remaining time")), ('position', _("shows current position"))])
+config.plugins.mediaplayer2.lcdOnVideoPlayback = ConfigSelection(default='default', choices=[
+        ('default', _("Default")),
+        ('remaining', _("shows remaining time")),
+        ('position', _("shows current position"))])
+config.plugins.mediaplayer2.contextMenuType = ConfigSelection(default='intermediate', choices=[
+        ("simple", _("Simple")),
+        ("intermediate", _("Intermediate")),
+        ("expert", _("Expert")) ])
+
 
 try:
     import sqlite3
@@ -111,6 +119,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
         print "[initConfigList]", element
         try:
             self.list = []
+            self.list.append(getConfigListEntry(_("context menu"), config.plugins.mediaplayer2.contextMenuType))
             self.list.append(getConfigListEntry(_("repeat playlist"), config.plugins.mediaplayer2.repeat))
             self.list.append(getConfigListEntry(_("save playlist on exit"), config.plugins.mediaplayer2.savePlaylistOnExit))
             self.list.append(getConfigListEntry(_("save last directory on exit"), config.plugins.mediaplayer2.saveDirOnExit))

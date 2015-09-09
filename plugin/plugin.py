@@ -742,17 +742,17 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
             else:
                 menu.append((_("Add files to playlist"), "copyfiles"))
             menu.append((_("Switch to playlist"), "playlist"))
-            if config.usage.setup_level.index >= 1:  # intermediate+
+            if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
                 menu.append((_("Delete file"), "deletefile"))
         else:
             menu.append((_("Switch to filelist"), "filelist"))
             menu.append((_("Clear playlist"), "clear"))
             menu.append((_("Delete entry"), "deleteentry"))
-            if config.usage.setup_level.index >= 1:  # intermediate+
+            if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
                 menu.append((_("Shuffle playlist"), "shuffle"))
         menu.append((_("Hide player"), "hide"));
         menu.append((_("Load playlist"), "loadplaylist"));
-        if config.usage.setup_level.index >= 1:  # intermediate+
+        if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
             menu.append((_("Save playlist"), "saveplaylist"));
             menu.append((_("Delete saved playlist"), "deleteplaylist"));
             menu.append((_("Edit settings"), "settings"))
