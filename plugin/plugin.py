@@ -739,8 +739,12 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         if self.currList == "filelist":
             if self.filelist.canDescent():
                 menu.append((_("Add directory to playlist"), "copydir"))
+                if config.plugins.mediaplayer2.contextMenuType.index >=2:
+                    menu.append((_("Add directory to playlist and play"), "copydirplay"))
             else:
                 menu.append((_("Add files to playlist"), "copyfiles"))
+                if config.plugins.mediaplayer2.contextMenuType.index >=2:
+                    menu.append((_("Add files to playlist and play"), "copyfilesplay"))
             menu.append((_("Switch to playlist"), "playlist"))
             if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
                 menu.append((_("Delete file"), "deletefile"))
@@ -766,8 +770,18 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
 
         if choice[1] == "copydir":
             self.copyDirectory(self.filelist.getSelection()[0])
+        elif choice[1] == "copydirplay":
+            self.copyDirectory(self.filelist.getSelection()[0])
+            if len(self.playlist) > 0:
+                self.switchToPlayList()
+                self.changeEntry(0)
         elif choice[1] == "copyfiles":
             self.copyDirectory(os.path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
+        elif choice[1] == "copyfilesplay":
+            self.copyDirectory(os.path.dirname(self.filelist.getSelection()[0].getPath()) + "/", recursive=False)
+            if len(self.playlist) > 0:
+                self.switchToPlayList()
+                self.changeEntry(0)
         elif choice[1] == "playlist":
             self.switchToPlayList()
         elif choice[1] == "filelist":
