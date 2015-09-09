@@ -24,6 +24,7 @@ from skin import parseColor
 
 # InfoBarCueSheetSupport from OpenPli with removed getLastPosition and
 # with delayed __serviceStarted, in case serviceReference is not yet set (BH image)
+# changed on_movie_start config
  
 class InfoBarCueSheetSupport:
     CUT_TYPE_IN = 0
@@ -86,9 +87,10 @@ class InfoBarCueSheetSupport:
             if (last > 900000) and (not length[1]  or (last < length[1] - 900000)):
                 self.resume_point = last
                 l = last / 90000
-                if "ask" in config.usage.on_movie_start.value or not length[1]:
-                    Notifications.AddNotificationWithCallback(self.playLastCB, MessageBox, _("Do you want to resume this playback?") + "\n" + (_("Resume position at %s") % ("%d:%02d:%02d" % (l / 3600, l % 3600 / 60, l % 60))), timeout=10, default="yes" in config.usage.on_movie_start.value)
-                elif config.usage.on_movie_start.value == "resume":
+                on_movie_start = config.plugins.mediaplayer2.onMovieStart.value
+                if "ask" in on_movie_start or not length[1]:
+                    Notifications.AddNotificationWithCallback(self.playLastCB, MessageBox, _("Do you want to resume this playback?") + "\n" + (_("Resume position at %s") % ("%d:%02d:%02d" % (l / 3600, l % 3600 / 60, l % 60))), timeout=10, default="yes" in on_movie_start)
+                elif on_movie_start == "resume":
 # TRANSLATORS: The string "Resuming playback" flashes for a moment
 # TRANSLATORS: at the start of a movie, when the user has selected
 # TRANSLATORS: "Resume from last position" as start behavior.
@@ -257,8 +259,6 @@ class MyInfoBarCueSheetSupport(InfoBarCueSheetSupport):
         gaugeRenderers = gaugeRenderers or gaugeRenderer and [gaugeRenderer] or []
         self.__gaugeRenderers = gaugeRenderers
         self.__cutList = CutList(dbfilename)
-        config.usage.on_movie_start.value = config.plugins.mediaplayer2.onMovieStart.value
-        self.onClose.append(self.__onClose)
 
     def __defaultGaugeRenderers(self):
         for r in self.__gaugeRenderers:
@@ -371,9 +371,6 @@ class MyInfoBarCueSheetSupport(InfoBarCueSheetSupport):
                 InfoBarCueSheetSupport.uploadCuesheet(self)
         else:
             InfoBarCueSheetSupport.uploadCuesheet(self)
-
-    def __onClose(self):
-        config.usage.on_movie_start.cancel()
         
         
 class StatusScreen(Screen):

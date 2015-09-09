@@ -21,7 +21,11 @@ config.plugins.mediaplayer2.extensionsMenu = ConfigYesNo(default=False)
 config.plugins.mediaplayer2.mainMenu = ConfigYesNo(default=False)
 config.plugins.mediaplayer2.cueSheetForServicemp3 = ConfigOnOff(default=True)
 config.plugins.mediaplayer2.saveLastPosition = ConfigYesNo(default=True)
-config.plugins.mediaplayer2.onMovieStart = ConfigSelection(default='ask', choices=[('ask',_("Ask")), ('resume' , _("Resume"))])
+config.plugins.mediaplayer2.onMovieStart = ConfigSelection(default = "resume", choices = [
+		("ask yes", _("Ask user") + " " + _("default") + " " + _("yes")),
+		("ask no", _("Ask user") + " " + _("default") + " " + _("no")),
+		("resume", _("Resume from last position")),
+		("beginning", _("Start from the beginning"))])
 config.plugins.mediaplayer2.useLibMedia = ConfigYesNo(default = False)
 config.plugins.mediaplayer2.libMedia = ConfigSelection(default='gst', choices=[('gst', 'GStreamer'), ('ep3', 'EPlayer3')])
 config.plugins.mediaplayer2.lcdOnVideoPlayback = ConfigSelection(default='default', choices=[('default', _("Default")), ('remaining', _("shows remaining time")), ('position', _("shows current position"))])
@@ -122,7 +126,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
                 if config.plugins.mediaplayer2.cueSheetForServicemp3.value:
                     self.list.append(getConfigListEntry(_("remove all saved positions"), self.removeAllPositionsCfg))
             self.list.append(getConfigListEntry(_("save last position (restart plugin)"), config.plugins.mediaplayer2.saveLastPosition))
-            self.list.append(getConfigListEntry(_("resume last position on movie start (restart plugin)"), config.plugins.mediaplayer2.onMovieStart))
+            self.list.append(getConfigListEntry(_("on movie start (restart plugin)"), config.plugins.mediaplayer2.onMovieStart))
             self.list.append(getConfigListEntry(_("LCD on video playback"), config.plugins.mediaplayer2.lcdOnVideoPlayback))
             self.list.append(getConfigListEntry(_("show in extensions menu"), config.plugins.mediaplayer2.extensionsMenu))
             self.list.append(getConfigListEntry(_("show in main menu"), config.plugins.mediaplayer2.mainMenu))
