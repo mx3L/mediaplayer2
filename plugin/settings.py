@@ -8,6 +8,8 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
+from . import _
+
 config.plugins.mediaplayer2 = ConfigSubsection()
 config.plugins.mediaplayer2.subtitles = ConfigSubsection()
 config.plugins.mediaplayer2.repeat = ConfigYesNo(default=False)
@@ -140,7 +142,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
             self.list.append(getConfigListEntry(_("show in extensions menu"), config.plugins.mediaplayer2.extensionsMenu))
             self.list.append(getConfigListEntry(_("show in main menu"), config.plugins.mediaplayer2.mainMenu))
             if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
-                self.list.append(getConfigListEntry(_("Media Framework"), config.plugins.mediaplayer2.libMedia))
+                self.list.append(getConfigListEntry(_("media framework"), config.plugins.mediaplayer2.libMedia))
             self["config"].setList(self.list)
         except KeyError:
             print "keyError"

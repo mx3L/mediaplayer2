@@ -32,46 +32,55 @@ msgid "Save"
 msgstr "Zapisz"
 
 msgid "repeat playlist"
-msgstr "Powtórz listę odtwarzania"
+msgstr "powtórz listę odtwarzania"
 
 msgid "save playlist on exit"
-msgstr "Zapisać listę odtwarzania przed wyjściem"
+msgstr "zapisać listę odtwarzania przed wyjściem"
 
 msgid "save last directory on exit"
-msgstr "Zapisać ostatni katalog przed wyjściem"
+msgstr "zapisać ostatni katalog przed wyjściem"
 
 msgid "start directory"
-msgstr "Katalog startowy"
+msgstr "katalog startowy"
 
 msgid "sorting of playlists"
-msgstr "Sortowanie list odtwarzania"
+msgstr "sortowanie list odtwarzania"
 
 msgid "show in extensions menu"
-msgstr "Pokaż w menu rozszerzeń"
+msgstr "pokaż w menu rozszerzeń"
 
-msgid "Always hide infobar"
-msgstr "Automatycznie ukrywaj pasek info"
+msgid "show in main menu"
+msgstr "pokaż w menu głównym"
 
-msgid "Hide infobar and close"
-msgstr "Ukryj pasek info i zamknij"
+msgid "LCD on video playback"
+msgstr "LCD podczas odtwarzania"
+
+msgid "always hide infobar"
+msgstr "automatycznie ukrywaj pasek info"
+
+msgid "hide infobar and close"
+msgstr "ukryj pasek info i zamknij"
 
 msgid "sqlite3 library is missing!, Cuesheets for servicemp3 disabled"
 msgstr "Brak biblioteki sqlite3! Pliki cuesheet dla servicemp3 są wyłączone"
 
-msgid "Cuesheets for servicemp3 (restart plugin)"
-msgstr "Pliki cuesheet dla servicemp3 (wymagany restart)"
+msgid "cuesheets for servicemp3 (restart plugin)"
+msgstr "pliki cuesheet dla servicemp3 (wymagany restart)"
 
-msgid "Remove all saved positions"
-msgstr "Usuń wszystkie zapisane pozycje"
+msgid "remove all saved positions"
+msgstr "usuń wszystkie zapisane pozycje"
 
-msgid "Save last position (restart plugin)"
-msgstr "Zapisz ostatnią pozycję (wymagany restart)"
+msgid "save last position (restart plugin)"
+msgstr "zapisz ostatnią pozycję (wymagany restart)"
 
 msgid "Resume last position on movie start (restart plugin)"
 msgstr "Przywróć ostatnią pozycję filmu (wymagany restart)"
 
-msgid "Media Framework"
-msgstr "Biblioteka odtwarzania mediów"
+msgid "on movie start (restart plugin)"
+msgstr "przy starcie filmu (wymagany restart)"
+
+msgid "media framework"
+msgstr "biblioteka odtwarzania mediów"
 
 msgid "Do you really want to delete all saved positions?"
 msgstr "Czy na pewno usunąć wszystkie zapisane pozycje?"
@@ -125,7 +134,7 @@ msgid "Exit mediaplayer"
 msgstr "Zamknij odtwarzacz"
 
 msgid "show info"
-msgstr "Pokaż info"
+msgstr "pokaż info"
 
 msgid "Play entry"
 msgstr "Odtwarzaj"
@@ -143,7 +152,7 @@ msgid "Play from next mark or playlist entry"
 msgstr "Odtwarzaj od następnego znacznika lub pozycji listy"
 
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 msgid "Jump to beginning of list"
 msgstr "Idź na początek listy"
@@ -181,6 +190,7 @@ msgstr "Odświeżanie napisów..."
 msgid "Exit media player?"
 msgstr "Wyjść z odtwarzacza?"
 
+#, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Ten odbiornik nie potrafi zdekodować strumieni %s!"
 
@@ -220,6 +230,7 @@ msgstr "Proszę wybrać listę..."
 msgid "Please select a playlist to delete..."
 msgstr "Proszę wybrać listę do skasowania..."
 
+#, python-format
 msgid "Do you really want to delete %s?"
 msgstr "Czy napewno chcesz usunąć %s?"
 
@@ -256,6 +267,7 @@ msgstr "błąd w archiwum: nieznana nazwa"
 msgid "unpack error: cannot open archive"
 msgstr "bład: nie można otworzyć archiwum"
 
+#, python-format
 msgid "unsupported archive %s"
 msgstr "nieobsługiwane archiwum %s"
 
@@ -264,3 +276,25 @@ msgstr "Użytkownik"
 
 msgid "Password"
 msgstr "Hasło"
+
+msgid "Show external subtitles status"
+msgstr "Pokaż status napisów zewnętrznych"
+
+msgid "Add directory to playlist and play"
+msgstr "Dodaj katalog do listy i odtwórz"
+
+msgid "Add files to playlist and play"
+msgstr "Dodaj pliki do listy i odtwórz"
+
+msgid "Do you want to resume this playback?"
+msgstr "Czy chcesz wznowić odtwarzanie?"
+
+#, python-format
+msgid "Resume position at %s"
+msgstr "Pozycja wznowienia %s"
+
+msgid "Resuming playback"
+msgstr "Wznawianie odtwarzania"
+
+msgid "context menu"
+msgstr "typ menu kontekstowego"

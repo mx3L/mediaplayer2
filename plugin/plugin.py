@@ -51,14 +51,15 @@ except ImportError:
     AUDIO_EXTENSIONS = frozenset((".mp2", ".mp3", ".wav", ".ogg", ".flac", ".m4a"))
 
 
-# check if ps is a symlink to busybox or regular file
-if os.path.islink("/bin/ps") == True:
-    libMediaTest = int(os.popen("cat /proc/$(ps | grep enigma2 | grep -v sh | grep -v grep | awk '{print $1}')/maps | grep libeplayer3 | wc -l").read().strip())
-else:
-    libMediaTest = int(os.popen("cat /proc/$(ps ax | grep enigma2 | grep -v sh | grep -v grep | awk '{print $1}')/maps | grep libeplayer3 | wc -l").read().strip())
+fname = "/proc/%d/maps" % os.getpid()
+libMediaTest = False
+with open(fname) as f:
+    for line in f:
+        if 'libeplayer3' in line:
+            libMediaTest = True
+            break
 
-# if libMediaTest is greater than 0 than enigma2 multiframework is detected
-if libMediaTest > 0:
+if libMediaTest:
     if config.plugins.mediaplayer2.useLibMedia.getValue() == False:
         config.plugins.mediaplayer2.useLibMedia.value = True
         config.plugins.mediaplayer2.useLibMedia.save()
@@ -1380,9 +1381,9 @@ def filescan_open(list, session, **kwargs):
         if file.mimetype == "video/MP2T":
             stype = 1
         else:
-            if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
-                if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-                    stype = 4099
+            if self.libMedia == "ep3":
+            # if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
+                stype = 4099
             else:
                 stype = 4097
         ref = eServiceReference(stype, 0, file.path)
@@ -1408,7 +1409,11 @@ def movielist_open(list, session, **kwargs):
     if f.mimetype == "video/MP2T":
         stype = 1
     else:
-        stype = 4097
+        if self.libMedia == "ep3":
+        # if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
+            stype = 4099
+        else:
+            stype = 4097
     if InfoBar.instance:
         path = os.path.split(f.path)[0]
         if not path.endswith('/'):
