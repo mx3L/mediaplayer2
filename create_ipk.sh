@@ -10,9 +10,9 @@ PVER="0.61"
 GITVER=$(git log -1 --format="%ci" | awk -F" " '{ print $1 }' | tr -d "-")
 #DSTAGE="beta"
 #DSTAGEVER="6"
-VER=$PVER\_$GITVER
+VER=$PVER-$GITVER
 
-PKG=${D}/enigma2-plugin-extensions-mediaplayer2_${VER}_all.ipk
+PKG=${D}/enigma2-plugin-extensions-mediaplayer2_${VER}_all
 PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/MediaPlayer2
 popd &> /dev/null
 
@@ -30,7 +30,6 @@ Maintainer: mxfitsat@gmail.com
 Depends: enigma2-plugin-extensions-subssupport (>=1.5.1)
 Recommends: python-sqlite3
 Homepage: https://code.google.com/p/mediaplayer2-for-sh4/
-Source: https://code.google.com/p/mediaplayer2-for-sh4/
 Description: MediaPlayer with external subtitle support  $VER"
 EOF
 
@@ -70,7 +69,8 @@ echo "2.0" > ${B}/debian-binary
 
 cd ${B}
 ls -la
-ar -r ${PKG} ./debian-binary ./data.tar.gz ./control.tar.gz
+ar -r ${PKG}.ipk ./debian-binary ./control.tar.gz ./data.tar.gz
+ar -r ${PKG}.deb ./debian-binary ./control.tar.gz ./data.tar.gz
 cd -
 
 rm -rf ${P}
