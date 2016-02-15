@@ -21,6 +21,8 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG
 from enigma import iPlayableService, eTimer, getDesktop
 from skin import parseColor
 
+from compat import eConnectCallback
+
 
 # InfoBarCueSheetSupport from OpenPli with removed getLastPosition and
 # with delayed __serviceStarted, in case serviceReference is not yet set (BH image)
@@ -45,7 +47,7 @@ class InfoBarCueSheetSupport:
         self.cut_list = [ ]
         self.is_closing = False
         self.timer = eTimer()
-        self.timer.callback.append(self.__isServiceStarted)
+        self.timer_conn = eConnectCallback(self.timer.timeout, self.__isServiceStarted)
         self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
             {
                 iPlayableService.evStart: self.__serviceStarted,
@@ -248,6 +250,8 @@ class InfoBarCueSheetSupport:
             
     def __onClose(self):
         self.timer.stop()
+        del self.timer_conn
+        del self.timer
 
 
 class MyInfoBarCueSheetSupport(InfoBarCueSheetSupport):
@@ -384,7 +388,7 @@ class StatusScreen(Screen):
         statusPositionX = 50
         statusPositionY = 100
         self.delayTimer = eTimer()
-        self.delayTimer.callback.append(self.hideStatus)
+        self.delayTimer_conn = eConnectCallback(self.delayTimer.timeout, self.hideStatus)
         self.delayTimerDelay = 1500
 
         self.skin = """
@@ -410,6 +414,7 @@ class StatusScreen(Screen):
 
     def __onClose(self):
         self.delayTimer.stop()
+        del self.delayTimer_conn
         del self.delayTimer
 
 class CutList(object):

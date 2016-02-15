@@ -29,6 +29,7 @@ from Tools.Directories import fileExists, resolveFilename, \
 from ServiceReference import ServiceReference
 from e2util import InfoBarAspectChange, StatusScreen, MyAudioSelection, \
     MyInfoBarCueSheetSupport
+from compat import eConnectCallback
 from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, \
     ePicLoad, getDesktop
 from settings import MediaPlayerSettings
@@ -92,7 +93,7 @@ class MediaPixmap(Pixmap):
         Pixmap.__init__(self)
         self.coverArtFileName = ""
         self.picload = ePicLoad()
-        self.picload.PictureData.get().append(self.paintCoverArtPixmapCB)
+        self.picload_conn = eConnectCallback(self.picload.PictureData, self.paintCoverArtPixmapCB)
         self.coverFileNames = ["folder.png", "folder.jpg"]
 
     def applySkin(self, desktop, screen):
@@ -298,14 +299,14 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
 
         self.righttimer = False
         self.rightKeyTimer = eTimer()
-        self.rightKeyTimer.callback.append(self.rightTimerFire)
+        self.rightKeyTimer_conn = eConnectCallback(self.rightKeyTimer.timeout, self.rightTimerFire)
 
         self.lefttimer = False
         self.leftKeyTimer = eTimer()
-        self.leftKeyTimer.callback.append(self.leftTimerFire)
+        self.leftKeyTimer_conn = eConnectCallback(self.leftKeyTimer.timeout, self.leftTimerFire)
 
         self.hideMediaPlayerInfoBar = eTimer()
-        self.hideMediaPlayerInfoBar.callback.append(self.timerHideMediaPlayerInfoBar)
+        self.hideMediaPlayerInfoBar_conn = eConnectCallback(self.hideMediaPlayerInfoBar.timeout, self.timerHideMediaPlayerInfoBar)
 
         self.currList = "filelist"
         self.isAudioCD = False
@@ -423,6 +424,7 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
                 hotplugNotifier.remove(self.hotplugCB)
             except:
                 pass
+            del self["coverArt"].picload_conn
             del self["coverArt"].picload
             self.close()
 
@@ -468,8 +470,12 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         self.session.open(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=20)
 
     def delMPTimer(self):
+        del self.rightKeyTimer_conn
         del self.rightKeyTimer
+        del self.leftKeyTimer_conn
         del self.leftKeyTimer
+        del self.hideMediaPlayerInfoBar_conn
+        del self.hideMediaPlayerInfoBar
 
     def info(self):
         if not self.shown:
@@ -1273,10 +1279,10 @@ class MediaPlayerLCDScreen(Screen):
         self["text4"] = Label("")
         self.text4 = ""
         self.timer = eTimer()
-        self.timer.callback.append(self.updateService)
+        self.timer_conn = eConnectCallback(self.timer.timeout, self.updateService)
         self.mode = self.POSITION_MODE
         self.serviceEnabled = False
-        self.onClose.append(self.timer.stop)
+        self.onClose.append(self.__onClose)
 
     def setText(self, text, line):
         if len(text) > 10:
@@ -1354,6 +1360,10 @@ class MediaPlayerLCDScreen(Screen):
                 l = length - position
                 l = l / 90000
                 self["text1"].setText("%d:%02d:%02d" % (l/3600, l%3600/60, l%60))
+
+    def __onClose(self):
+        del self.timer_conn
+        del self.timer
 
 def mainCheckTimeshiftCallback(session, answer):
     if answer:
