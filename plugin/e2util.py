@@ -22,6 +22,7 @@ from enigma import iPlayableService, eTimer, getDesktop
 from skin import parseColor
 
 from compat import eConnectCallback
+from settings import SERVICE_EPLAYER3, SERVICE_EXTEPLAYER3, SERVICE_GSTPLAYER, SERVICEMP3
 
 
 # InfoBarCueSheetSupport from OpenPli with removed getLastPosition and
@@ -344,7 +345,7 @@ class MyInfoBarCueSheetSupport(InfoBarCueSheetSupport):
                 print '[InfobarCueSheetSupport] downloadCuesheet - serviceReference is None!'
                 return
             print '[InfobarCueSheetSupport] downloadCuesheet - serviceReference type : %d' % sref.type
-            if sref.type == 4097:
+            if sref.type in (SERVICE_GSTPLAYER, SERVICE_EPLAYER3, SERVICE_EXTEPLAYER3, SERVICEMP3):
                 try:
                     self.cut_list = self.__cutList.getCutList(sref.getPath())
                 except Exception:
@@ -362,7 +363,7 @@ class MyInfoBarCueSheetSupport(InfoBarCueSheetSupport):
         if self.cueSheetForServicemp3:
             sref = self.session.nav.getCurrentlyPlayingServiceReference()
             sref_type = sref and sref.type
-            if sref_type and sref_type == 4097:
+            if sref_type and sref_type in (SERVICE_GSTPLAYER, SERVICE_EPLAYER3, SERVICE_EXTEPLAYER3, SERVICEMP3):
                 try:
                     self.__cutList.setCutList(sref.getPath(), self.cut_list)
                 except Exception:
