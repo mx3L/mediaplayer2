@@ -1,14 +1,18 @@
+import os
+
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.FileList import FileList
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry, ConfigSubsection, \
-    ConfigYesNo, ConfigOnOff, ConfigDirectory, ConfigSelection, ConfigNothing
+    ConfigYesNo, ConfigOnOff, ConfigDirectory, ConfigSelection, ConfigNothing, \
+    ConfigInteger
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
 from . import _
+from enigma import eEnv
 
 config.plugins.mediaplayer2 = ConfigSubsection()
 config.plugins.mediaplayer2.subtitles = ConfigSubsection()
@@ -28,8 +32,61 @@ config.plugins.mediaplayer2.onMovieStart = ConfigSelection(default = "resume", c
         ("ask no", _("Ask user") + " " + _("default") + " " + _("no")),
         ("resume", _("Resume from last position")),
         ("beginning", _("Start from the beginning"))])
+
+SERVICEMP3          = 4097
+SERVICE_EPLAYER3    = 4099
+SERVICE_GSTPLAYER   = 5001
+SERVICE_EXTEPLAYER3 = 5002
+
+LIBMEDIA_CHOICES = {SERVICEMP3:_('Gstreamer')}
+
 config.plugins.mediaplayer2.useLibMedia = ConfigYesNo(default = False)
-config.plugins.mediaplayer2.libMedia = ConfigSelection(default='gst', choices=[('gst', 'GStreamer'), ('ep3', 'EPlayer3')])
+fname = "/proc/%d/maps" % os.getpid()
+libMediaTest = False
+
+with open(fname) as f:
+    for line in f:
+        if 'libeplayer3' in line:
+            libMediaTest = True
+            LIBMEDIA_CHOICES[SERVICE_EPLAYER3] = _('Eplayer3')
+            break
+
+try:
+    from Plugins.Extensions.ServiceApp import serviceapp_client
+except ImportError:
+    pass
+else:
+    if serviceapp_client.isGstPlayerAvailable():
+        libMediaTest = True
+        LIBMEDIA_CHOICES[SERVICE_GSTPLAYER] = _('Gstreamer(App)')
+    if serviceapp_client.isExtEplayer3Available():
+        libMediaTest = True
+        LIBMEDIA_CHOICES[SERVICE_EXTEPLAYER3] =  _('ExtEplayer3(App)')
+
+sinkChoices = []
+if (os.path.isfile(eEnv.resolve("$libdir/gstreamer-1.0/libgstdvbvideosink.so")) and
+    os.path.isfile(eEnv.resolve("$libdir/gstreamer-1.0/libgstdvbaudiosink.so"))):
+	sinkChoices.append("original")
+if (os.path.isfile(eEnv.resolve("$libdir/gstreamer-1.0/libgstdvbvideosinkexp.so")) and
+    os.path.isfile(eEnv.resolve("$libdir/gstreamer-1.0/libgstdvbaudiosinkexp.so"))):
+	sinkChoices.append("experimental")
+
+config.plugins.mediaplayer2.serviceGstPlayer = ConfigSubsection()
+config.plugins.mediaplayer2.serviceGstPlayer.sink = ConfigSelection(default = 'original', choices=sinkChoices)
+config.plugins.mediaplayer2.serviceGstPlayer.subtitles = ConfigYesNo(default=True)
+config.plugins.mediaplayer2.serviceGstPlayer.bufferSize = ConfigInteger(8192, (1024, 1024 * 64))
+config.plugins.mediaplayer2.serviceGstPlayer.bufferDuration = ConfigInteger(0, (0, 100))
+
+if libMediaTest:
+    if config.plugins.mediaplayer2.useLibMedia.getValue() == False:
+        config.plugins.mediaplayer2.useLibMedia.value = True
+        config.plugins.mediaplayer2.useLibMedia.save()
+else:
+    if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
+        config.plugins.mediaplayer2.useLibMedia.value = False
+        config.plugins.mediaplayer2.useLibMedia.save()
+
+config.plugins.mediaplayer2.libMedia = ConfigSelection(default=str(SERVICEMP3), choices=[(str(k), v) for k,v in LIBMEDIA_CHOICES.items()])
 config.plugins.mediaplayer2.lcdOnVideoPlayback = ConfigSelection(default='default', choices=[
         ('default', _("Default")),
         ('remaining', _("shows remaining time")),
@@ -45,6 +102,18 @@ try:
 except ImportError:
     sqlite3 = None
     config.plugins.mediaplayer2.cueSheetForServicemp3.value = False
+
+
+def ServiceGstPlayerApplySettings():
+    if config.plugins.mediaplayer2.serviceGstPlayer.sink.value == "original":
+        videoSink, audioSink = ("dvbvideosink", "dvbaudiosink")
+    else:
+        videoSink, audioSink = ("dvbvideosinkexp", "dvbaudiosinkexp")
+    subtitleEnabled = config.plugins.mediaplayer2.serviceGstPlayer.subtitles.value
+    bufferSize = config.plugins.mediaplayer2.serviceGstPlayer.bufferSize.value
+    bufferDuration = config.plugins.mediaplayer2.serviceGstPlayer.bufferDuration.value
+    serviceapp_client.setGstreamerPlayerSettings(serviceapp_client.OPTIONS_USER, videoSink, audioSink, subtitleEnabled, bufferSize, bufferDuration)
+    serviceapp_client.setUseUserSettings()
 
 class DirectoryBrowser(Screen, HelpableScreen):
 
@@ -105,6 +174,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
         self.removeAllPositionsCfg = ConfigNothing()
         self.initConfigList()
         config.plugins.mediaplayer2.saveDirOnExit.addNotifier(self.initConfigList)
+        config.plugins.mediaplayer2.libMedia.addNotifier(self.initConfigList)
 
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
         {
@@ -113,12 +183,15 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
             "cancel": self.cancel,
             "ok": self.ok,
         }, -2)
+        self.onClose.append(self.removeNotifiers)
 
     def layoutFinished(self):
         self.setTitle(self.setup_title)
 
+    def removeNotifiers(self):
+        config.plugins.mediaplayer2.libMedia.removeNotifier(self.initConfigList)
+
     def initConfigList(self, element=None):
-        print "[initConfigList]", element
         try:
             self.list = []
             self.list.append(getConfigListEntry(_("context menu"), config.plugins.mediaplayer2.contextMenuType))
@@ -143,6 +216,9 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
             self.list.append(getConfigListEntry(_("show in main menu"), config.plugins.mediaplayer2.mainMenu))
             if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
                 self.list.append(getConfigListEntry(_("media framework"), config.plugins.mediaplayer2.libMedia))
+                if int(config.plugins.mediaplayer2.libMedia.value) == SERVICE_GSTPLAYER:
+                    self.list.append(getConfigListEntry(_("sink"), config.plugins.mediaplayer2.serviceGstPlayer.sink))
+                    self.list.append(getConfigListEntry(_("subtitles"), config.plugins.mediaplayer2.serviceGstPlayer.subtitles))
             self["config"].setList(self.list)
         except KeyError:
             print "keyError"

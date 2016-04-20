@@ -32,7 +32,7 @@ from e2util import InfoBarAspectChange, StatusScreen, MyAudioSelection, \
 from compat import eConnectCallback
 from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, \
     ePicLoad, getDesktop
-from settings import MediaPlayerSettings
+from settings import MediaPlayerSettings, LIBMEDIA_CHOICES, SERVICEMP3, SERVICE_GSTPLAYER, SERVICE_EXTEPLAYER3, SERVICE_EPLAYER3, ServiceGstPlayerApplySettings
 from skin import parseColor
 
 from . import _
@@ -50,24 +50,6 @@ try:
     from Components.MovieList import AUDIO_EXTENSIONS
 except ImportError:
     AUDIO_EXTENSIONS = frozenset((".mp2", ".mp3", ".wav", ".ogg", ".flac", ".m4a"))
-
-
-fname = "/proc/%d/maps" % os.getpid()
-libMediaTest = False
-with open(fname) as f:
-    for line in f:
-        if 'libeplayer3' in line:
-            libMediaTest = True
-            break
-
-if libMediaTest:
-    if config.plugins.mediaplayer2.useLibMedia.getValue() == False:
-        config.plugins.mediaplayer2.useLibMedia.value = True
-        config.plugins.mediaplayer2.useLibMedia.save()
-else:
-    if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
-        config.plugins.mediaplayer2.useLibMedia.value = False
-        config.plugins.mediaplayer2.useLibMedia.save()
 
 
 class MyPlayList(PlayList):
@@ -182,12 +164,9 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         self["filelist"] = self.filelist
         
         if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
-            if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-                self.libMedia = "ep3"
-            else:
-                self.libMedia = "gst"
+            self.libMedia = int(config.plugins.mediaplayer2.libMedia.getValue())
         else:
-            self.libMedia = "gst"
+            self.libMedia = SERVICEMP3
 
         self.playlist = MyPlayList()
         self.is_closing = False
@@ -756,6 +735,22 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
             if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
                 menu.append((_("Delete file"), "deletefile"))
         else:
+            playref = self.session.nav.getCurrentlyPlayingServiceReference()
+            curref = self.playlist.getServiceRefList()[self.playlist.getSelectionIndex()]
+            if curref and curref.type in (SERVICE_EPLAYER3, SERVICE_EXTEPLAYER3, SERVICE_GSTPLAYER, SERVICEMP3):
+                curtype = -1 # no type
+                if playref and playref.getPath() == curref.getPath():
+                    curtype = playref.type
+                if len(LIBMEDIA_CHOICES) > 1:
+                    choices = LIBMEDIA_CHOICES.copy()
+                    if curtype in choices.keys():
+                        del choices[curtype]
+                    defaulttype = self.libMedia
+                    if defaulttype in choices.keys():
+                        menu.append((_("Play with") + " " + choices[defaulttype], "playentry", defaulttype))
+                        del choices[defaulttype]
+                    for reftype in choices.keys():
+                        menu.append((_("Play with") + " " + choices[reftype], "playentry", reftype))
             menu.append((_("Switch to filelist"), "filelist"))
             menu.append((_("Clear playlist"), "clear"))
             menu.append((_("Delete entry"), "deleteentry"))
@@ -815,6 +810,9 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
             self.session.openWithCallback(self.applySettings, MediaPlayerSettings, self)
         elif choice[1] == "audiocd":
             self.playAudioCD()
+        elif choice[1] == "playentry":
+            self.playlist.setCurrentPlaying(self.playlist.getSelectionIndex())
+            self.playEntry(choice[2])
 
     def playAudioCD(self):
         from enigma import eServiceReference
@@ -841,12 +839,9 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         else:
             self["repeat"].setPixmapNum(0)
         if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
-            if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-                self.libMedia = "ep3"
-            else:
-                self.libMedia = "gst"
+            self.libMedia = int(config.plugins.mediaplayer2.libMedia.getValue())
         else:
-            self.libMedia = "gst"
+            self.libMedia = SERVICEMP3
 
     def showEventInformation(self):
         from Screens.EventView import EventViewSimple
@@ -951,7 +946,6 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         self.switchToFileList()
 
     def copyDirectory(self, directory, recursive=True):
-        from enigma import eServiceReference
         print "copyDirectory", directory
         if directory == '/':
             print "refusing to operate on /"
@@ -963,14 +957,8 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
                 if recursive:
                     if x[0][0] != directory:
                         self.copyDirectory(x[0][0])
-            elif filelist.getServiceRef() and (filelist.getServiceRef().type == 4097 or filelist.getServiceRef().type == 4099):
-                if self.libMedia == "ep3":
-                # if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-                    stype = 4099
-                else:
-                    stype = 4097
-                newRef = eServiceReference(stype, 0, x[0][0].getPath())
-                self.playlist.addFile(newRef)
+            elif filelist.getServiceRef() and filelist.getServiceRef().type == 4097:
+                self.playlist.addFile(x[0][0])
         self.playlist.updateList()
 
     def deleteFile(self):
@@ -981,7 +969,7 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         if self.service is None:
             return
         if self.service.type != 4098 and self.session.nav.getCurrentlyPlayingServiceReference() is not None:
-            if self.service == self.session.nav.getCurrentlyPlayingServiceReference():
+            if self.service.getPath() == self.session.nav.getCurrentlyPlayingServiceReference().getPath():
                 self.stopEntry()
 
         serviceHandler = eServiceCenter.getInstance()
@@ -1032,7 +1020,6 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
                 self.switchToFileList()
 
     def copyFile(self):
-        from enigma import eServiceReference
         if self.filelist.getServiceRef().type == 4098:  # playlist
             ServiceRef = self.filelist.getServiceRef()
             extension = ServiceRef.getPath()[ServiceRef.getPath().rfind('.') + 1:]
@@ -1043,16 +1030,7 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
                     self.playlist.addFile(x.ref)
             self.playlist.updateList()
         else:
-            if (self.filelist.getServiceRef().type == 4097) or (self.filelist.getServiceRef().type == 4099):  # media file... ??
-                if self.libMedia == "ep3":
-                # if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-                    stype = 4099
-                else:
-                    stype = 4097
-                newRef = eServiceReference(stype, 0, self.filelist.getServiceRef().getPath())
-                self.playlist.addFile(newRef)
-            else:
-                self.playlist.addFile(self.filelist.getServiceRef())
+            self.playlist.addFile(self.filelist.getServiceRef())
             self.playlist.updateList()
             if len(self.playlist) == 1:
                 self.changeEntry(0)
@@ -1120,10 +1098,15 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
             if len(self.playlist) > 0:
                 self.changeEntry(0)
 
-    def playEntry(self):
+    def playEntry(self, stype = None):
+        from enigma import eServiceReference
         if len(self.playlist.getServiceRefList()):
             needsInfoUpdate = False
             currref = self.playlist.getServiceRefList()[self.playlist.getCurrentIndex()]
+            if stype is not None:
+                currref = eServiceReference(stype, 0, currref.getPath())
+            elif currref.type in (SERVICE_EPLAYER3, SERVICE_EXTEPLAYER3, SERVICE_GSTPLAYER, SERVICEMP3):
+                currref = eServiceReference(self.libMedia, 0, currref.getPath())
             if self.session.nav.getCurrentlyPlayingServiceReference() is None or currref != self.session.nav.getCurrentlyPlayingServiceReference() or self.playlist.isStopped():
                 for f in self.onStartPlayback:
                     f()
@@ -1133,8 +1116,9 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
                     subPath = os.path.splitext(currref.getPath())[0] + '.srt'
                     if os.path.isfile(subPath):
                         self.loadSubs(subPath)
-
-                self.session.nav.playService(self.playlist.getServiceRefList()[self.playlist.getCurrentIndex()])
+                if currref.type == SERVICE_GSTPLAYER:
+                    ServiceGstPlayerApplySettings()
+                self.session.nav.playService(currref)
                 info = eServiceCenter.getInstance().info(currref)
                 description = info and info.getInfoString(currref, iServiceInformation.sDescription) or ""
                 self["title"].setText(description)
@@ -1391,11 +1375,7 @@ def filescan_open(list, session, **kwargs):
         if file.mimetype == "video/MP2T":
             stype = 1
         else:
-            if self.libMedia == "ep3":
-            # if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-                stype = 4099
-            else:
-                stype = 4097
+            stype = 4097
         ref = eServiceReference(stype, 0, file.path)
         mp.playlist.addFile(ref)
 
@@ -1419,11 +1399,7 @@ def movielist_open(list, session, **kwargs):
     if f.mimetype == "video/MP2T":
         stype = 1
     else:
-        if self.libMedia == "ep3":
-        # if config.plugins.mediaplayer2.libMedia.getValue() == "ep3":
-            stype = 4099
-        else:
-            stype = 4097
+        stype = 4097
     if InfoBar.instance:
         path = os.path.split(f.path)[0]
         if not path.endswith('/'):
