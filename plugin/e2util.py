@@ -52,6 +52,7 @@ class InfoBarCueSheetSupport:
         self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
             {
                 iPlayableService.evStart: self.__serviceStarted,
+                iPlayableService.evEnd: self.__serviceStopped,
                 iPlayableService.evCuesheetChanged: self.downloadCuesheet,
             })
         self.onClose.append(self.__onClose)
@@ -60,6 +61,9 @@ class InfoBarCueSheetSupport:
         if self.is_closing:
             return
         self.timer.start(100)
+
+    def __serviceStopped(self):
+        self.timer.stop()
 
     def __isServiceStarted(self):
         if self.session.nav.getCurrentlyPlayingServiceReference() is not None:
