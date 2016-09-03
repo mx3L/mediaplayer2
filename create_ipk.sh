@@ -8,7 +8,7 @@ P=${D}/ipkg.tmp.$$
 B=${D}/ipkg.build.$$
 pushd ${D} &> /dev/null
 
-PVER="0.61"
+PVER="0.62"
 GITVER=$(git log -1 --format="%ci" | awk -F" " '{ print $1 }' | tr -d "-")
 #DSTAGE="beta"
 #DSTAGEVER="6"
