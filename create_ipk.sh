@@ -1,7 +1,9 @@
 #!/bin/bash
 # script taken from openwebif project
+set -e
 
 D=$(pushd $(dirname $0) &> /dev/null; pwd; popd &> /dev/null)
+S=${D}/ipkg.src.$$
 P=${D}/ipkg.tmp.$$
 B=${D}/ipkg.build.$$
 pushd ${D} &> /dev/null
@@ -16,9 +18,15 @@ PKG=${D}/enigma2-plugin-extensions-mediaplayer2_${VER}_all
 PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/MediaPlayer2
 popd &> /dev/null
 
+rm -rf ${D}/ipkg.src*
+rm -rf ${D}/ipkg.tmp*
+rm -rf ${D}/ipkg.build*
+
 mkdir -p ${P}
 mkdir -p ${P}/CONTROL
 mkdir -p ${B}
+mkdir -p ${S}
+git archive --format=tar HEAD | (cd ${S} && tar xf -)
 
 cat > ${P}/CONTROL/control << EOF
 Package: enigma2-plugin-extensions-mediaplayer2
@@ -43,9 +51,8 @@ EOF
 chmod 755 ${P}/CONTROL/postrm
 
 mkdir -p ${P}${PLUGINPATH}
-cp -rp ${D}/plugin/* ${P}${PLUGINPATH} 2> /dev/null
+cp -rp ${S}/plugin/* ${P}${PLUGINPATH}
 
-echo "creating locales for mediaplayer"
 msgfmt ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.mo
@@ -53,7 +60,6 @@ msgfmt ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPA
 #echo "compiling to optimized python bytecode"
 #python -O -m compileall ${P} 1> /dev/null
 
-echo "cleanup of unnecessary files"
 #find ${P} -name "*.po" -exec rm {} \;
 find ${P} -name "*.pyo" -print -exec rm {} \;
 find ${P} -name "*.pyc" -print -exec rm {} \;
@@ -71,7 +77,9 @@ cd ${B}
 ls -la
 ar -r ${PKG}.ipk ./debian-binary ./control.tar.gz ./data.tar.gz
 ar -r ${PKG}.deb ./debian-binary ./control.tar.gz ./data.tar.gz
-cd -
+cd ${D}
 
 rm -rf ${P}
 rm -rf ${B}
+rm -rf ${S}
+
