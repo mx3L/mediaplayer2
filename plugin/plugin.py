@@ -756,6 +756,7 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
             menu.append((_("Delete entry"), "deleteentry"))
             if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
                 menu.append((_("Shuffle playlist"), "shuffle"))
+                menu.append((_("Show in filelist"), "showinfilelist"))
         menu.append((_("Hide player"), "hide"));
         menu.append((_("Load playlist"), "loadplaylist"));
         if config.plugins.mediaplayer2.contextMenuType.index >=1:  # intermediate+
@@ -813,6 +814,17 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
         elif choice[1] == "playentry":
             self.playlist.setCurrentPlaying(self.playlist.getSelectionIndex())
             self.playEntry(choice[2])
+        elif choice[1] == "showinfilelist":
+            path = self.playlist.getCurrent().getPath()
+            if os.path.exists(path):
+                selection = None
+                dirname = os.path.dirname(path) + "/"
+                for p in [os.path.join(dirname, f) for f in os.listdir(dirname)]:
+                    if p == path:
+                        selection = p
+                        break
+                self.filelist.changeDir(dirname, selection)
+
 
     def playAudioCD(self):
         from enigma import eServiceReference
