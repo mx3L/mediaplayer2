@@ -1,0 +1,304 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MediaPlayer2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-27 10:00+0100\n"
+"PO-Revision-Date: 2016-09-29 02:00+0100\n"
+"Last-Translator: shimano\n"
+"Language-Team: shimano <none>\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Use"
+msgstr "Usar"
+
+msgid "Directory browser"
+msgstr "Explorador de pastas"
+
+msgid "Edit settings"
+msgstr "Editar definições"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "repeat playlist"
+msgstr "repetir Lista de Reprodução"
+
+msgid "save playlist on exit"
+msgstr "Guardar Lista de Reprodução ao sair"
+
+msgid "save last directory on exit"
+msgstr "Guardar a última pasta ao sair"
+
+msgid "start directory"
+msgstr "pasta inicial"
+
+msgid "sorting of playlists"
+msgstr "ordenação das Listas de Reprodução"
+
+msgid "show in extensions menu"
+msgstr "mostrar no menu extensões"
+
+msgid "Show in filelist"
+msgstr "Mostrar na Lista de arquivos"
+
+msgid "show in main menu"
+msgstr "mostrar no menu principal"
+
+msgid "LCD on video playback"
+msgstr "LCD ligado ao reproduzir vídeo"
+
+msgid "always hide infobar"
+msgstr "esconder sempre a barra de informação"
+
+msgid "hide infobar and close"
+msgstr "esconder a barra de informação e fechar"
+
+msgid "sqlite3 library is missing!, Cuesheets for servicemp3 disabled"
+msgstr "libraria sqlite3 não disponível!, Cuesheets para servicemp3 desabilitado"
+
+msgid "cuesheets for servicemp3 (restart plugin)"
+msgstr "Cue sheets para servicemp3 ( reiniciar plugin )"
+
+msgid "remove all saved positions"
+msgstr "remover todas as posições guardadas"
+
+msgid "save last position (restart plugin)"
+msgstr "guardar a última posição ( reiniciar plugin )"
+
+msgid "Resume last position on movie start (restart plugin)"
+msgstr "Retomar a última posição quando a reprodução iniciar (reiniciar o plugin)"
+
+msgid "on movie start (restart plugin)"
+msgstr "no início do filme (reiniciar o plugin)"
+
+msgid "media framework"
+msgstr "estrutura de mídia"
+
+msgid "Do you really want to delete all saved positions?"
+msgstr "Deseja mesmo apagar todas as posições guardadas?"
+
+msgid "replace default MediaPlayer in main menu"
+msgstr "substituir o Reprodutor de Mídia no Menu Principal"
+
+msgid "Letterbox"
+msgstr "Letterbox"
+
+msgid "Pan&scan"
+msgstr "Pan&scan"
+
+msgid "Nonlinear"
+msgstr "Nonlinear"
+
+msgid "Just scale"
+msgstr "Just scale"
+
+msgid "PillarBox"
+msgstr "Pillarbox"
+
+msgid "change aspect ratio"
+msgstr "alterar a relação de aspecto"
+
+msgid "Aspect"
+msgstr "Aspecto"
+
+msgid "Policy"
+msgstr "Política"
+
+msgid "Artist"
+msgstr "Artista"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Album"
+msgstr "Álbum"
+
+msgid "Year"
+msgstr "Ano"
+
+msgid "Genre"
+msgstr "Género"
+
+msgid "Add file to playlist"
+msgstr "Adicionar arquivo à Lista de Reprodução"
+
+msgid "Exit mediaplayer"
+msgstr "Sair do Reprodutor de Mídia"
+
+msgid "show info"
+msgstr "mostrar informação"
+
+msgid "Play entry"
+msgstr "Reproduzir entrada"
+
+msgid "Pause"
+msgstr "Pausar a Reprodução"
+
+msgid "Stop entry"
+msgstr "Parar entrada"
+
+msgid "Play from previous mark or playlist entry"
+msgstr "Reproduzir a partir da marca anterior ou da Lista de Reprodução"
+
+msgid "Play from next mark or playlist entry"
+msgstr "Reproduzir a partir da próxima marca ou da Lista de Reprodução"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Jump to beginning of list"
+msgstr "Saltar para o início da Lista"
+
+msgid "Jump to end of list"
+msgstr "Saltar para o fim da Lista"
+
+msgid "Switch to playlist"
+msgstr "Mudar para Lista de Reprodução"
+
+msgid "Switch to filelist"
+msgstr "Mudar para a Lista de arquivos"
+
+msgid "Delete playlist entry"
+msgstr "Apagar entrada na Lista de Reprodução"
+
+msgid "Clear playlist"
+msgstr "Limpar Lista de Reprodução"
+
+msgid "Shuffle playlist"
+msgstr "Baralhar Lista de Reprodução"
+
+msgid "Refresh subtitles"
+msgstr "Refrescamento de Legendas"
+
+msgid "show event details"
+msgstr "Mostrar detalhes do evento"
+
+msgid "No external subtitles loaded"
+msgstr "Legendas externas não carregadas"
+
+msgid "Refreshing subtitles..."
+msgstr "A refrescar legendas ..."
+
+msgid "Exit media player?"
+msgstr "Sair do Reprodutor de Mídia?"
+
+#, python-format
+msgid "This receiver cannot decode %s streams!"
+msgstr "Este receptor não pode descodificar  %s transmissões!"
+
+msgid "Play audio-CD..."
+msgstr "Reproduzir CD-Audio..."
+
+msgid "Add directory to playlist"
+msgstr "Adicionar pasta à Lista de Reprodução"
+
+msgid "Add files to playlist"
+msgstr "Adicione arquivos à Lista de Reprodução"
+
+msgid "Delete file"
+msgstr "Apagar arquivo"
+
+msgid "Delete entry"
+msgstr "Apagar entrada "
+
+msgid "Hide player"
+msgstr "Esconder Player"
+
+msgid "Load playlist"
+msgstr "Carregar Lista de Reprodução"
+
+msgid "Save playlist"
+msgstr "Guardar Lista de Reprodução"
+
+msgid "Delete saved playlist"
+msgstr "Apagar Lista de Reprodução guardada"
+
+msgid "Please enter filename (empty = use current date)"
+msgstr "Introduza o nome do arquivo (vazio = usa data actual)"
+
+msgid "Please select a playlist..."
+msgstr "Por favor selecione uma Lista de Reprodução..."
+
+msgid "Please select a playlist to delete..."
+msgstr "Seleccione uma Lista de Reprodução para apagar..."
+
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr "Deseja mesmo apagar %s?"
+
+msgid "Delete failed!"
+msgstr "Excluir falhou!"
+
+msgid "You cannot delete this!"
+msgstr "Não pode apagar isto!"
+
+msgid "Media player"
+msgstr "Reprodutor de Mídia"
+
+msgid "Watch movies..."
+msgstr "Assista a Filmes..."
+
+msgid "View video CD..."
+msgstr "Ver Vídeo CD's..."
+
+msgid "Play music..."
+msgstr "Reproduzir Música..."
+
+msgid "Play back media files with subtitles"
+msgstr "Reproduzir Filmes com Legendas"
+
+msgid "Language selection"
+msgstr "Selecção do Idioma"
+
+msgid "Type text of picture"
+msgstr "Tipo imagem de texto"
+
+msgid "unpack error: cannot get subname"
+msgstr "erro ao descompactar: impossível obter subnome"
+
+msgid "unpack error: cannot open archive"
+msgstr "erro ao descompactar: impossível abrir arquivo"
+
+#, python-format
+msgid "unsupported archive %s"
+msgstr "arquivo não suportado %s"
+
+msgid "Username"
+msgstr "Utilizador"
+
+msgid "Password"
+msgstr "Palavra-Passe"
+
+msgid "Show external subtitles status"
+msgstr "Mostra Estado das legendas externas"
+
+msgid "Add directory to playlist and play"
+msgstr "Adicionar pasta à Lista de Reprodução e reproduzir"
+
+msgid "Add files to playlist and play"
+msgstr "Adicione arquivos à Lista de Reprodução e reproduza"
+
+msgid "Do you want to resume this playback?"
+msgstr "Você quer retomar esta reprodução?"
+
+#, python-format
+msgid "Resume position at %s"
+msgstr "Posição de retoma em %s"
+
+msgid "Resuming playback"
+msgstr "Retomar a Reprodução"
+
+msgid "context menu"
+msgstr "menu de contexto"
