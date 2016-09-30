@@ -189,7 +189,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
         self.setTitle(self.setup_title)
 
     def removeNotifiers(self):
-        config.plugins.mediaplayer2.libMedia.removeNotifier(self.initConfigList)
+        config.plugins.mediaplayer2.libMedia.notifiers.remove(self.initConfigList)
 
     def initConfigList(self, element=None):
         try:
