@@ -56,6 +56,7 @@ cp -rp ${S}/plugin/* ${P}${PLUGINPATH}
 msgfmt ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.mo
+msgfmt ${P}${PLUGINPATH}/locale/pt/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/pt/LC_MESSAGES/MediaPlayer2.mo
 
 #echo "compiling to optimized python bytecode"
 #python -O -m compileall ${P} 1> /dev/null
