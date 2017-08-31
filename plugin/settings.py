@@ -51,11 +51,18 @@ with open(fname) as f:
             LIBMEDIA_CHOICES[SERVICE_EPLAYER3] = _('Eplayer3')
             break
 
+serviceapp_available = False
 try:
     from Plugins.Extensions.ServiceApp import serviceapp_client
+    serviceapp_available = True
 except ImportError:
-    pass
-else:
+    try:
+        from Plugins.SystemPlugins.ServiceApp import serviceapp_client
+        serviceapp_available = True
+    except ImportError:
+        pass
+
+if serviceapp_available:
     if serviceapp_client.isGstPlayerAvailable():
         libMediaTest = True
         LIBMEDIA_CHOICES[SERVICE_GSTPLAYER] = _('Gstreamer(App)')

@@ -160,7 +160,7 @@ class MediaPlayer(Screen, InfoBarBase, SubsSupportStatus, SubsSupport, InfoBarSe
 
         # 'None' is magic to start at the list of mountpoints
         defaultDir = config.plugins.mediaplayer2.defaultDir.getValue()
-        self.filelist = FileList(defaultDir, matchingPattern="(?i)^.*\.(mp2|mp3|ogg|ts|mts|m2ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|flv|mov|dts|3gp|3g2|asf|wmv|wma|iso)", useServiceRef=True, additionalExtensions="4098:m3u 4098:e2pls 4098:pls")
+        self.filelist = FileList(defaultDir, matchingPattern="(?i)^.*\.(mp2|mp3|ogg|ts|mts|m2ts|wav|wave|m3u|pls|e2pls|mpg|vob|avi|divx|m4v|mkv|mp4|m4a|dat|flac|flv|mov|dts|3gp|3g2|asf|wmv|wma|iso|webm)", useServiceRef=True, additionalExtensions="4098:m3u 4098:e2pls 4098:pls")
         self["filelist"] = self.filelist
         
         if config.plugins.mediaplayer2.useLibMedia.getValue() == True:
