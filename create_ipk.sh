@@ -53,6 +53,7 @@ chmod 755 ${P}/CONTROL/postrm
 mkdir -p ${P}${PLUGINPATH}
 cp -rp ${S}/plugin/* ${P}${PLUGINPATH}
 
+msgfmt ${P}${PLUGINPATH}/locale/bg/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/bg/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.mo
 msgfmt ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.mo
@@ -69,8 +70,8 @@ mkdir -p ${P}/tmp/mediaplayer2
 mkdir -p ${P}/tmp/mediaplayer2/python2.6/
 mkdir -p ${P}/tmp/mediaplayer2/python2.7/
 
-tar -C ${P} -czf ${B}/data.tar.gz . --exclude=CONTROL
-tar -C ${P}/CONTROL -czf ${B}/control.tar.gz .
+tar -C ${P} -cz --format=gnu -f ${B}/data.tar.gz . --exclude=CONTROL
+tar -C ${P}/CONTROL -cz --format=gnu -f ${B}/control.tar.gz .
 
 echo "2.0" > ${B}/debian-binary
 

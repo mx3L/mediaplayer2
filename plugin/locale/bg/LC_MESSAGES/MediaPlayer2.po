@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MediaPlayer2 plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-21 12:53+0300\n"
+"PO-Revision-Date: 2018-04-29 13:50+0200\n"
+"Last-Translator: Peter <sct2003@abv.bg>\n"
+"Language-Team: Bulgarian <>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 2.0\n"
+
+msgid "Jump to previous marked position"
+msgstr "Към предния флаг"
+
+msgid "Jump to next marked position"
+msgstr "Към следващия флаг"
+
+msgid "Toggle a cut mark at the current position"
+msgstr "Поставяне или премахване на флаг"
+
+msgid "Do you want to resume this playback?"
+msgstr "Да се продължи ли от последното място?"
+
+msgid "Resume position at %s"
+msgstr "Ще започне от %s"
+
+msgid "Resuming playback"
+msgstr "Продължение"
+
+msgid "Letterbox"
+msgstr "Допълване"
+
+msgid "Pan&scan"
+msgstr "Изрязване"
+
+msgid "Nonlinear"
+msgstr ""
+
+msgid "Just scale"
+msgstr "Разширяване"
+
+msgid "PillarBox"
+msgstr "Допълване"
+
+msgid "change aspect ratio"
+msgstr "промяна на съотношението"
+
+msgid "Aspect"
+msgstr "Съотношение"
+
+msgid "Policy"
+msgstr "Обработка"
+
+msgid "Artist"
+msgstr "Изпълнител"
+
+msgid "Title"
+msgstr "Заглавие"
+
+msgid "Album"
+msgstr "Албум"
+
+msgid "Year"
+msgstr "Година"
+
+msgid "Genre"
+msgstr "Жанр"
+
+msgid "Add file to playlist"
+msgstr "Добави файла към плейлиста"
+
+msgid "Exit mediaplayer"
+msgstr "Изход"
+
+msgid "show info"
+msgstr "Показва информация"
+
+msgid "Play entry"
+msgstr "Плей"
+
+msgid "Pause"
+msgstr "Пауза"
+
+msgid "Stop entry"
+msgstr "Стоп"
+
+msgid "Play from previous mark or playlist entry"
+msgstr "Към предния флаг или елемент"
+
+msgid "Play from next mark or playlist entry"
+msgstr "Към следващия флаг или елемент"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Jump to beginning of list"
+msgstr "Към началото на списъка"
+
+msgid "Jump to end of list"
+msgstr "Към края на списъка"
+
+msgid "Switch to playlist"
+msgstr "Към плейлиста"
+
+msgid "Switch to filelist"
+msgstr "Към списъка с файлове"
+
+msgid "Delete playlist entry"
+msgstr "Изтриване от плейлиста"
+
+msgid "Clear playlist"
+msgstr "Изчистване на плейлиста"
+
+msgid "Shuffle playlist"
+msgstr "Разбъркване на плейлиста"
+
+msgid "Show external subtitles status"
+msgstr "Показва статуса на външните субтитри"
+
+msgid "show event details"
+msgstr "показва подробности"
+
+msgid "No external subtitles loaded"
+msgstr "Не са заредени външни субтитри"
+
+msgid "Exit media player?"
+msgstr "Изход от MediaPlayer2?"
+
+msgid "This receiver cannot decode %s streams!"
+msgstr "Този приемник не може да обработва %s потоци!"
+
+msgid "Play audio-CD..."
+msgstr "Изпълнение на Аудио CD"
+
+msgid "Add directory to playlist"
+msgstr "Добави папката към плейлиста"
+
+msgid "Add directory to playlist and play"
+msgstr "Добави папката към плейлиста и стартирай плейъра"
+
+msgid "Add files to playlist"
+msgstr "Добави файла към плейлиста"
+
+msgid "Add files to playlist and play"
+msgstr "Добави файла към плейлиста и го пусни"
+
+msgid "Delete file"
+msgstr "Изтрий файла"
+
+msgid "Play with"
+msgstr "Пускане с"
+
+msgid "Delete entry"
+msgstr "Изтриване"
+
+msgid "Show in filelist"
+msgstr "Покажи в списъка с файлове"
+
+msgid "Hide player"
+msgstr "Скрий плейъра"
+
+msgid "Load playlist"
+msgstr "Зареждане на плейлист"
+
+msgid "Save playlist"
+msgstr "Запис на плейлист"
+
+msgid "Delete saved playlist"
+msgstr "Изтриване на плейлисти"
+
+msgid "Edit settings"
+msgstr "Настройки"
+
+msgid "Please enter filename (empty = use current date)"
+msgstr "Въведете име за файла (празно = днешна дата)"
+
+msgid "Please select a playlist..."
+msgstr "Изберете плейлист..."
+
+msgid "Please select a playlist to delete..."
+msgstr "Изберете плейлист за изтриване..."
+
+msgid "Do you really want to delete %s?"
+msgstr "Наистина ли искате да изтриете %s?"
+
+msgid "Delete failed!"
+msgstr "Изтриването е неуспешно!"
+
+msgid "You cannot delete this!"
+msgstr "Не можете да изтриете този файл!"
+
+msgid "Media player"
+msgstr "Media player"
+
+msgid "Watch movies..."
+msgstr "Гледане на филми..."
+
+msgid "View video CD..."
+msgstr "Гледане на видео CD..."
+
+msgid "Play music..."
+msgstr "Изпълнение на музика..."
+
+msgid "Play back media files with subtitles"
+msgstr "Плейване на медийни файлове със субтитри"
+
+msgid "Ask user"
+msgstr "Попитай"
+
+msgid "default"
+msgstr "стандартно"
+
+msgid "yes"
+msgstr "да"
+
+msgid "no"
+msgstr "не"
+
+msgid "Resume from last position"
+msgstr "Продължи от последната позиция"
+
+msgid "Start from the beginning"
+msgstr "Започни от начало"
+
+msgid "Gstreamer"
+msgstr "Gstreamer"
+
+msgid "Eplayer3"
+msgstr "Eplayer3"
+
+msgid "Gstreamer(App)"
+msgstr "Gstreamer(външно)"
+
+msgid "ExtEplayer3(App)"
+msgstr "ExtEplayer3(външно)"
+
+msgid "Default"
+msgstr "стандартно"
+
+msgid "shows remaining time"
+msgstr "покажи оставащото време"
+
+msgid "shows current position"
+msgstr "покажи текущото време"
+
+msgid "Simple"
+msgstr "опростено"
+
+msgid "Intermediate"
+msgstr "междинно"
+
+msgid "Expert"
+msgstr "пълно"
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "Use"
+msgstr "Избери"
+
+msgid "Directory browser"
+msgstr "Файлов мениджър"
+
+msgid "Save"
+msgstr "Запис"
+
+msgid "context menu"
+msgstr "Контекстно меню"
+
+msgid "repeat playlist"
+msgstr "Повтаряне на плейлиста"
+
+msgid "save playlist on exit"
+msgstr "Запомни плейлиста при изход"
+
+msgid "save last directory on exit"
+msgstr "Запомни последната папка при изход"
+
+msgid "start directory"
+msgstr "Начална папка"
+
+msgid "sorting of playlists"
+msgstr "Азбучно подреждане на плейлиста"
+
+msgid "always hide infobar"
+msgstr "Винаги скривай инфобара"
+
+msgid "hide infobar and close"
+msgstr "Изход дори при видим инфобар"
+
+msgid "sqlite3 library is missing!, cuesheets for servicemp3 disabled"
+msgstr "sqlite3 липсва!, cuesheets за servicemp3 е невъзможен"
+
+msgid "cuesheets for servicemp3 (restart plugin)"
+msgstr "cuesheets за servicemp3 (изисква рестарт)"
+
+msgid "remove all saved positions"
+msgstr "Премахване на всички запазени позиции"
+
+msgid "save last position (restart plugin)"
+msgstr "Запомни последната позиция (изисква рестарт)"
+
+msgid "on movie start (restart plugin)"
+msgstr "При стартиране (изисква рестарт)"
+
+msgid "LCD on video playback"
+msgstr "На LCD"
+
+msgid "show in extensions menu"
+msgstr "Покажи в списъка с разширения"
+
+msgid "show in main menu"
+msgstr "Покажи в главното меню"
+
+msgid "media framework"
+msgstr "Ядро на плейъра"
+
+msgid "sink"
+msgstr ""
+
+msgid "subtitles"
+msgstr "субтитри"
+
+msgid "Do you really want to delete all saved positions?"
+msgstr "Наистина ли искате да изтриете всички запазени позиции?"
