@@ -1,0 +1,343 @@
+# Language fr/LC translations for mediaplayer package.
+# Copyright (C) 2018 THE mediaplayer'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mediaplayer package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mediaplayer 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-31 14:20+0100\n"
+"PO-Revision-Date: 2018-12-31 14:13+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+
+msgid "Add directory to playlist"
+msgstr "Ajouter le répertoire à la liste de lecture"
+
+msgid "Add directory to playlist and play"
+msgstr "Ajouter un répertoire à la liste de lecture et jouer"
+
+msgid "Add file to playlist"
+msgstr "Ajouter le fichier à la liste de lecture"
+
+msgid "Add files to playlist"
+msgstr "Ajouter les fichiers à la liste de lecture"
+
+msgid "Add files to playlist and play"
+msgstr "Ajouter des fichiers à la liste de lecture et jouer"
+
+msgid "Album"
+msgstr "Album"
+
+msgid "Artist"
+msgstr "Artiste"
+
+msgid "Ask user"
+msgstr "Demander à l'utilisateur"
+
+msgid "Aspect"
+msgstr "Aspect"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Clear playlist"
+msgstr "Effacer liste de lecture"
+
+msgid "Default"
+msgstr "Par défaut"
+
+msgid "Delete entry"
+msgstr "Supprimer l’entrée"
+
+msgid "Delete failed!"
+msgstr "La suppression a échoué!"
+
+msgid "Delete file"
+msgstr "Effacer fichier"
+
+msgid "Delete playlist entry"
+msgstr "Supprimer l’entrée de la liste de lecture"
+
+msgid "Delete saved playlist"
+msgstr "Supprimer la liste de lecture sauvegardée"
+
+msgid "Directory browser"
+msgstr "Navigateur des répertoires"
+
+#, python-format
+msgid "Do you really want to delete %s?"
+msgstr "Voulez-vous vraiment supprimer %s?"
+
+msgid "Do you really want to delete all saved positions?"
+msgstr "Voulez-vous vraiment supprimer toutes les positions enregistrées?"
+
+msgid "Do you want to resume this playback?"
+msgstr "Voulez-vous reprendre cette lecture?"
+
+msgid "Edit settings"
+msgstr "Éditer paramètres"
+
+msgid "Eplayer3"
+msgstr "Eplayer3"
+
+msgid "Exit media player?"
+msgstr "Quitter lecteur de média?"
+
+msgid "Exit mediaplayer"
+msgstr "Quitter le lecteur de média"
+
+msgid "Expert"
+msgstr "Expert"
+
+msgid "ExtEplayer3(App)"
+msgstr "ExtEplayer3(App)"
+
+msgid "Genre"
+msgstr "Genre"
+
+msgid "Gstreamer"
+msgstr "Gstreamer"
+
+msgid "Gstreamer(App)"
+msgstr "Gstreamer(App)"
+
+msgid "Hide player"
+msgstr "Cacher le lecteur"
+
+msgid "Intermediate"
+msgstr "Intermédiaire"
+
+msgid "Jump to beginning of list"
+msgstr "Aller au début de la liste"
+
+msgid "Jump to end of list"
+msgstr "Aller à la fin de liste"
+
+msgid "Jump to next marked position"
+msgstr "Aller à la position marquée suivante"
+
+msgid "Jump to previous marked position"
+msgstr "Aller à la position marquée précédente"
+
+msgid "Just scale"
+msgstr "Juste mettre à l'échelle"
+
+msgid "LCD on video playback"
+msgstr "LCD sur la lecture vidéo"
+
+msgid "Letterbox"
+msgstr "Letterbox"
+
+msgid "Load playlist"
+msgstr "Charger liste lecture"
+
+msgid "Media player"
+msgstr "Lecteur de médias"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "No external subtitles loaded"
+msgstr "Pas de sous-titre externe chargé"
+
+msgid "Nonlinear"
+msgstr "Non linéaire"
+
+msgid "Pan&scan"
+msgstr "Pan&Scan"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "PillarBox"
+msgstr "Bandes noires"
+
+msgid "Play audio-CD..."
+msgstr "Lire CD-Audio…"
+
+msgid "Play back media files with subtitles"
+msgstr "Lecture de fichiers multimédias avec sous-titres"
+
+msgid "Play entry"
+msgstr "Lire l’entrée"
+
+msgid "Play from next mark or playlist entry"
+msgstr "Lire à partir de la prochaine marque ou playlist entrée"
+
+msgid "Play from previous mark or playlist entry"
+msgstr "Lire à partir de la précédente marque ou playlist entrée"
+
+msgid "Play music..."
+msgstr "Lire musique..."
+
+msgid "Play with"
+msgstr "Jouer avec"
+
+msgid "Please enter filename (empty = use current date)"
+msgstr "Veuillez saisir le nom de fichier (vide = utilise la date du jour)"
+
+msgid "Please select a playlist to delete..."
+msgstr "Veuillez choisir une liste de lecture à supprimer…"
+
+msgid "Please select a playlist..."
+msgstr "Veuillez choisir une liste de lecture..."
+
+msgid "Policy"
+msgstr "Politique"
+
+msgid "Resume from last position"
+msgstr "Reprendre à la dernière position"
+
+#, python-format
+msgid "Resume position at %s"
+msgstr "Reprendre position à %s"
+
+#. TRANSLATORS: The string "Resuming playback" flashes for a moment
+#. TRANSLATORS: at the start of a movie, when the user has selected
+#. TRANSLATORS: "Resume from last position" as start behavior.
+#. TRANSLATORS: The purpose is to notify the user that the movie starts
+#. TRANSLATORS: in the middle somewhere and not from the beginning.
+#. TRANSLATORS: (Some translators seem to have interpreted it as a
+#. TRANSLATORS: question or a choice, but it is a statement.)
+msgid "Resuming playback"
+msgstr "Reprise de la lecture"
+
+msgid "Save"
+msgstr "Sauver"
+
+msgid "Save playlist"
+msgstr "Sauvegarder la liste de lecture"
+
+msgid "Show external subtitles status"
+msgstr "Afficher l'état des sous-titres externes"
+
+msgid "Show in filelist"
+msgstr "Afficher dans la liste des fichiers"
+
+msgid "Shuffle playlist"
+msgstr "Mélanger la liste de lecture"
+
+msgid "Simple"
+msgstr "Simple"
+
+msgid "Start from the beginning"
+msgstr "Démarrer depuis le début"
+
+msgid "Stop entry"
+msgstr "Arrêter entrée"
+
+msgid "Switch to filelist"
+msgstr "Basculer vers la liste des fichiers"
+
+msgid "Switch to playlist"
+msgstr "Basculer vers la liste de lecture"
+
+#, python-format
+msgid "This receiver cannot decode %s streams!"
+msgstr "Ce récepteur ne peut pas décoder des flux %s!"
+
+msgid "Title"
+msgstr "Titre"
+
+msgid "Toggle a cut mark at the current position"
+msgstr "Commuter un marqueur coupé à cette position"
+
+msgid "Use"
+msgstr "Utiliser"
+
+msgid "View video CD..."
+msgstr "Voir Vidéo CD…"
+
+msgid "Watch movies..."
+msgstr "Lire les films..."
+
+msgid "Year"
+msgstr "Année"
+
+msgid "You cannot delete this!"
+msgstr "Vous ne pouvez pas supprimer ceci!"
+
+msgid "always hide infobar"
+msgstr "toujours cacher la barre d'infos"
+
+msgid "change aspect ratio"
+msgstr "changement d'aspect ratio"
+
+msgid "context menu"
+msgstr "menu contextuel"
+
+msgid "cuesheets for servicemp3 (restart plugin)"
+msgstr "cuesheets pour servicemp3 (redémarrer plugin)"
+
+msgid "default"
+msgstr "par défaut"
+
+msgid "hide infobar and close"
+msgstr "masquer la barre d'informations et fermer"
+
+msgid "media framework"
+msgstr "cadre médiatique"
+
+msgid "no"
+msgstr "non"
+
+msgid "on movie start (restart plugin)"
+msgstr "au démarrage du film (redémarrer plugin)"
+
+msgid "remove all saved positions"
+msgstr "supprimer toutes les positions sauvegardées"
+
+msgid "repeat playlist"
+msgstr "répéter liste lecture"
+
+msgid "save last directory on exit"
+msgstr "sauver dernier répertoire en sortant"
+
+msgid "save last position (restart plugin)"
+msgstr "sauvegarder dernière position (redémarrer plugin)"
+
+msgid "save playlist on exit"
+msgstr "sauver liste lecture en sortant"
+
+msgid "show event details"
+msgstr "afficher détails événement"
+
+msgid "show in extensions menu"
+msgstr "afficher dans le menu des extensions"
+
+msgid "show in main menu"
+msgstr "afficher dans le menu principal"
+
+msgid "show info"
+msgstr "afficher info"
+
+msgid "shows current position"
+msgstr "affiche la position actuelle"
+
+msgid "shows remaining time"
+msgstr "affiche le temps restant"
+
+msgid "sink"
+msgstr "sink"
+
+msgid "sorting of playlists"
+msgstr "tri des listes de lecture"
+
+msgid "sqlite3 library is missing!, cuesheets for servicemp3 disabled"
+msgstr "la bibliothèque sqlite3 est manquante!, cuesheets pour servicemp3 désactivé"
+
+msgid "start directory"
+msgstr "répertoire de départ"
+
+msgid "subtitles"
+msgstr "sous-titres"
+
+msgid "yes"
+msgstr "oui"

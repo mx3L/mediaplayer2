@@ -38,7 +38,7 @@ Maintainer: mxfitsat@gmail.com
 Depends: enigma2-plugin-extensions-subssupport (>=1.5.1)
 Recommends: python-sqlite3
 Homepage: https://code.google.com/p/mediaplayer2-for-sh4/
-Description: MediaPlayer with external subtitle support  $VER"
+Description: MediaPlayer with external subtitle support $VER
 EOF
 
 cat > ${P}/CONTROL/postrm << EOF
@@ -53,11 +53,13 @@ chmod 755 ${P}/CONTROL/postrm
 mkdir -p ${P}${PLUGINPATH}
 cp -rp ${S}/plugin/* ${P}${PLUGINPATH}
 
-msgfmt ${P}${PLUGINPATH}/locale/bg/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/bg/LC_MESSAGES/MediaPlayer2.mo
-msgfmt ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/cs/LC_MESSAGES/MediaPlayer2.mo
-msgfmt ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/sk/LC_MESSAGES/MediaPlayer2.mo
-msgfmt ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/pl/LC_MESSAGES/MediaPlayer2.mo
-msgfmt ${P}${PLUGINPATH}/locale/pt/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/pt/LC_MESSAGES/MediaPlayer2.mo
+cd ${P}${PLUGINPATH}/locale/
+languages=($(ls -d */ | gsed 's/\/$//g; s/.*\///g'))
+cd -
+for lang in "${languages[@]}" ; do
+	printf "Generating mo files for %s\n" $lang
+	msgfmt ${P}${PLUGINPATH}/locale/${lang}/LC_MESSAGES/MediaPlayer2.po -o ${P}${PLUGINPATH}/locale/${lang}/LC_MESSAGES/MediaPlayer2.mo
+done
 
 #echo "compiling to optimized python bytecode"
 #python -O -m compileall ${P} 1> /dev/null

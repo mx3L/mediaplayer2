@@ -14,11 +14,12 @@ SRC_URI = "git://github.com/mx3L/mediaplayer2;protocol=git;branch=master"
 S = "${WORKDIR}/git"
 
 do_compile () {
-    cd ${S}/plugin
-    for i in `ls locale`
+    cd ${S}/plugin/locale/
+    for i in `ls -d */`
     do
-        msgfmt -o locale/$i/LC_MESSAGES/MediaPlayer2.mo locale/$i/LC_MESSAGES/MediaPlayer2.po
+        msgfmt -o $i/LC_MESSAGES/MediaPlayer2.mo $i/LC_MESSAGES/MediaPlayer2.po
     done
+    cd ..
 }
 
 do_install () {
